@@ -44,7 +44,7 @@
 
         game_toggle {
             bindings = <&tog 4>;
-            key-positions = <39 41 42>;
+            key-positions = <38 43>;
         };
     };
 
