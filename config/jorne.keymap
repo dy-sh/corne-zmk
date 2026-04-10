@@ -10,6 +10,17 @@
 #include <dt-bindings/zmk/outputs.h>
 
 / {
+    behaviors {
+        altq: alt_quote {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
 
@@ -34,8 +45,8 @@
         base {
             bindings = <
 &none  &mt LGUI TAB     &kp Q  &kp W  &kp E      &kp R     &kp T        &kp Y      &kp U      &kp I      &kp O    &kp P     &kp LBKT    &none
-       &mt LCTRL ESC    &kp A  &kp S  &kp D      &kp F     &kp G        &kp H      &kp J      &kp K      &kp L    &kp SEMI  &kp SQT
-       &kp LSHFT        &kp Z  &kp X  &kp C      &kp V     &kp B        &kp N      &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp LALT
+       &mt LCTRL ESC    &kp A  &kp S  &kp D      &kp F     &kp G        &kp H      &kp J      &kp K      &kp L    &kp SEMI  &altq LALT SQT
+       &kp LSHFT        &kp Z  &kp X  &kp C      &kp V     &kp B        &kp N      &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
                                        &kp LCTRL  &mo 1     &kp SPACE    &kp ENTER  &lt 2 F24  &kp BSPC
             >;
         };
@@ -51,8 +62,8 @@
 
         nav {
             bindings = <
-&none  &none   &none   &none   &none   &none   &none      &kp HOME   &kp PG_DN  &kp PG_UP    &kp END   &none     &kp DEL       &none
-       &none   &none   &none   &none   &none   &none      &kp LEFT   &kp DOWN   &kp UP       &kp RIGHT &none     &none
+&none  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6     &kp HOME   &kp PG_DN  &kp PG_UP    &kp END   &none     &kp DEL       &none
+       &kp F7  &kp F8  &kp F9  &kp F10 &kp F11 &kp F12    &kp LEFT   &kp DOWN   &kp UP       &kp RIGHT &none     &none
        &none   &none   &none   &none   &none   &none      &none      &none      &kp LS(FSLH) &kp FSLH  &none     &none
                                 &trans  &trans  &trans     &trans     &trans     &trans
             >;
