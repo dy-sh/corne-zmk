@@ -84,6 +84,14 @@ Combo на Corne `key-positions = <36 37>` (left thumbs) -> на Jorne `key-posi
 
 **Почему v0.3.0, а не main:** ZMK main включает Zephyr 4.1 с переименованием board definitions (`nice_nano_v2` → `nice_nano@2.0.0`). v0.3.0 гарантирует совместимость.
 
+## Синхронизация AHK-скрипта
+
+При изменении блока AHK в `README.md` (раздел Windows — AutoHotkey, между ` ```autohotkey ` и закрывающими ` ``` `) **сразу же** применять идентичные изменения к реальному файлу пользователя:
+
+`C:\Users\user\Documents\Autohotkey\CapsLock Escape.ahk`
+
+README — это шаблон, рабочий скрипт лежит отдельно. Не оставлять пользователю задачу копировать вручную — менять оба файла в одном flow.
+
 ## Структура репозитория
 
 - `config/jorne.keymap` — раскладка (3 слоя: base, L1 symbols/BT, L2 numbers/nav)
