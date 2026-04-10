@@ -19,6 +19,38 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+
+        sym_lt: sym_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&lang_en_m>;
+        };
+
+        nav_lt: nav_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&lang_ru_m>;
+        };
+    };
+
+    macros {
+        lang_en_m: lang_to_english {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&macro_tap &kp F23>, <&macro_tap &to 0>;
+        };
+
+        lang_ru_m: lang_to_russian {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&macro_tap &kp F24>, <&macro_tap &to 5>;
+        };
     };
 
     combos {
@@ -37,6 +69,11 @@
             if-layers = <1 2>;
             then-layer = <3>;
         };
+
+        nav_ru_overlay {
+            if-layers = <2 5>;
+            then-layer = <6>;
+        };
     };
 
     keymap {
@@ -47,7 +84,7 @@
 &none  &mt LGUI TAB     &kp Q  &kp W  &kp E      &kp R     &kp T        &kp Y      &kp U      &kp I      &kp O    &kp P     &kp LBKT    &none
        &mt LCTRL ESC    &kp A  &kp S  &kp D      &kp F     &kp G        &kp H      &kp J      &kp K      &kp L    &kp SEMI  &altq LALT SQT
        &kp LSHFT        &kp Z  &kp X  &kp C      &kp V     &kp B        &kp N      &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
-                                       &kp LCTRL  &mo 1     &kp SPACE    &kp ENTER  &lt 2 F24  &kp BSPC
+                                       &kp LCTRL  &sym_lt 1 0  &kp SPACE    &kp ENTER  &nav_lt 2 0  &kp BSPC
             >;
         };
 
@@ -64,7 +101,7 @@
             bindings = <
 &none  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6     &kp HOME   &kp PG_DN  &kp PG_UP    &kp END   &none     &kp DEL       &none
        &kp F7  &kp F8  &kp F9  &kp F10 &kp F11 &kp F12    &kp LEFT   &kp DOWN   &kp UP       &kp RIGHT &none     &none
-       &none   &none   &none   &none   &none   &none      &none      &none      &kp LS(FSLH) &kp FSLH  &none     &none
+       &none   &none   &none   &none   &none   &none      &none      &none      &kp COMMA    &kp DOT   &kp LS(FSLH)  &none
                                 &trans  &trans  &trans     &trans     &trans     &trans
             >;
         };
@@ -84,6 +121,24 @@
        &kp TAB    &kp A  &kp S  &kp D      &kp F     &kp G        &kp HOME   &kp LEFT  &kp DOWN   &kp RIGHT  &kp END   &kp F2
        &kp LSHFT  &kp Z  &kp X  &kp C      &kp V     &kp B        &kp N5     &kp N6    &kp N7     &kp N8     &kp N9    &kp N0
                                  &kp LCTRL  &kp LALT  &kp SPACE    &kp ENTER  &tog 4    &kp DEL
+            >;
+        };
+
+        base_ru {
+            bindings = <
+&none  &mt LGUI TAB     &kp Q  &kp W  &kp E      &kp R          &kp T        &kp Y      &kp U        &kp I      &kp O    &kp P     &kp LBKT    &none
+       &mt LCTRL ESC    &kp A  &kp S  &kp D      &kp F          &kp G        &kp H      &kp J        &kp K      &kp L    &kp SEMI  &altq LALT SQT
+       &kp LSHFT        &kp Z  &kp X  &kp C      &kp V          &kp B        &kp N      &kp M        &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
+                                       &kp LCTRL  &sym_lt 1 0   &kp SPACE    &kp ENTER  &nav_lt 2 0  &kp BSPC
+            >;
+        };
+
+        nav_ru {
+            bindings = <
+&none  &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans        &trans     &trans       &trans     &none
+       &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans        &trans     &trans       &trans
+       &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &kp LS(FSLH)  &kp FSLH   &kp LS(N7)   &trans
+                                &trans  &trans  &trans     &trans  &trans  &trans
             >;
         };
     };
