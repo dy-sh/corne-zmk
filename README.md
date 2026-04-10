@@ -422,7 +422,7 @@ SwitchLanguage() {
                     "type": "input_source_if"
                 }
             ],
-            "from": { "key_code": "f13" },
+            "from": { "key_code": "f24" },
             "to": [{ "select_input_source": { "language": "ru" } }],
             "type": "basic"
         },
@@ -433,7 +433,7 @@ SwitchLanguage() {
                     "type": "input_source_if"
                 }
             ],
-            "from": { "key_code": "f13" },
+            "from": { "key_code": "f24" },
             "to": [{ "select_input_source": { "language": "en" } }],
             "type": "basic"
         }
