@@ -5,3 +5,4 @@ tmp/
 archive/
 *.bak
 config/temp
+asus-motherboard-keyboard-filter/keyboard-class-backup-*.reg
