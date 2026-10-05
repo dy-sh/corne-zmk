@@ -452,19 +452,38 @@ ZMK Studio позволяет менять раскладку через бра�
 }
 
 ; Левый Alt: tap → set EN. Hold + другая клавиша = нативный Alt (Alt+Tab, Alt+F4 и т.д.).
-; Префикс ~ пропускает Alt в Windows нативно, скрипт только наблюдает за нажатием.
-~LAlt:: {
-    KeyWait("LAlt")
-    ; Если между нажатием и отпусканием не было других клавиш — это tap
-    if (A_PriorKey = "LAlt")
+; Полный перехват (без ~): Alt отправляется в Windows вручную, чтобы на bare-release
+; не активировалось меню окна. После SetLanguage шлём vk07 (undefined virtual key) —
+; это гасит pending активацию Alt-menu, ничего не печатая в активное окно.
+lalt_t := 0
+*LAlt:: {
+    global lalt_t
+    lalt_t := A_TickCount
+    Send("{Blind}{LAlt DownR}")
+}
+*LAlt Up:: {
+    global lalt_t
+    Send("{Blind}{LAlt Up}")
+    if (A_PriorKey = "LAlt" && A_TickCount - lalt_t < 250) {
         SetLanguage(0x0409)
+        Send("{vk07}")
+    }
 }
 
 ; Правый Alt: tap → set RU. Hold работает как обычный Alt.
-~RAlt:: {
-    KeyWait("RAlt")
-    if (A_PriorKey = "RAlt")
+ralt_t := 0
+*RAlt:: {
+    global ralt_t
+    ralt_t := A_TickCount
+    Send("{Blind}{RAlt DownR}")
+}
+*RAlt Up:: {
+    global ralt_t
+    Send("{Blind}{RAlt Up}")
+    if (A_PriorKey = "RAlt" && A_TickCount - ralt_t < 250) {
         SetLanguage(0x0419)
+        Send("{vk07}")
+    }
 }
 
 ; F23 / F24 (сплит-клавиатура): явный set EN / set RU
